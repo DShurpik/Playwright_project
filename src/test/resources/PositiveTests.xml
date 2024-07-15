@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+
+<suite name="FirstTest">
+    <test name="Filling fields">
+        <classes>
+            <class name="FirstTest"/>
+            <parameter name="fullname" value="D S"/>
+            <parameter name="email" value="ds@gmail.com"/>
+            <parameter name="currentAddress" value="Minsk"/>
+            <parameter name="permanentAddress" value="Minsk"/>
+        </classes>
+    </test>
+
+
+</suite>
+

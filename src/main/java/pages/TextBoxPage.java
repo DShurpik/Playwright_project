@@ -1,8 +1,13 @@
 package pages;
 
 import basePages.BasePage;
+import com.microsoft.playwright.ElementHandle;
 import com.microsoft.playwright.Locator;
 import com.microsoft.playwright.Page;
+
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 public class TextBoxPage extends BasePage {
 
@@ -48,6 +53,20 @@ public class TextBoxPage extends BasePage {
     }
 
     public boolean getOutputName(String expectedName) {
-        return outputName.textContent().contains(expectedName);
+        return outPutField.textContent().contains(expectedName);
+    }
+
+    public Map<String, String> getResult() {
+        List<ElementHandle> elements = getPage().querySelectorAll("#output .border" + " p");
+
+        Map<String, String> resultMap = new HashMap<>();
+        for (ElementHandle element : elements) {
+            String text = element.textContent().trim();
+            String[] parts = text.split(":", 2); // Split only at the first colon
+            if (parts.length == 2) {
+                resultMap.put(parts[0].trim(), parts[1].trim());
+            }
+        }
+        return resultMap;
     }
 }
