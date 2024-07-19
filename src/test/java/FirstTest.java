@@ -3,9 +3,8 @@ import dataGenerator.Generator;
 import org.testng.Assert;
 import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
+import pages.CheckBoxPage;
 import pages.TextBoxPage;
-
-import java.util.Map;
 
 import static pages.Navigation.*;
 
@@ -51,6 +50,23 @@ public class FirstTest extends BaseTest {
         Assert.assertEquals(user.getFullName(), textBoxPage.getResult().get("Name"));
         Assert.assertEquals(user.getEmail(), textBoxPage.getResult().get("Email"));
         Assert.assertEquals(user.getCurrentAddress(), textBoxPage.getResult().get("Current Address"));
-        Assert.assertEquals(user.getPermanentAddress(), textBoxPage.getResult().get("Permananet Address"));
+        Assert.assertEquals(user.getPermanentAddress(), textBoxPage.getResult().get("Permanent Address"));
+    }
+
+    @Test(description = "Click checkbox randomly, and check result")
+    public void clickCheckboxRandomly() {
+        CheckBoxPage checkBoxPage = new CheckBoxPage(getPage());
+
+        checkBoxPage.open("http://85.192.34.140:8081/");
+        checkBoxPage.navigateTo(ELEMENTS);
+        checkBoxPage.navigateToMenu(CHECK_BOX);
+
+        checkBoxPage.clickExpandAllBtn();
+        checkBoxPage.clickRandomItem();
+
+        String actualResult = checkBoxPage.getCheckedCheckBoxes();
+        String expectedResult = checkBoxPage.getOutputResult();
+
+        Assert.assertEquals(actualResult, expectedResult);
     }
 }
